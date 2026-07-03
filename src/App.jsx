@@ -1,30 +1,124 @@
-import './App.css'
-import Product from "./Product"
-import User from "./User"
-import Header from "./Header"
-import Post from './Post'
-import Main1 from "./Main1"
-import Footer from "./Footer"
-import {nanoid} from "nanoid"
-import { useState } from 'react'
-import { useEffect } from 'react'
-import Category from './Category'
-import Card from './Card'
-import AllCards from './AllCards';
-import Calculator from './Calculator';
-import Register from './Register';
-import Login from './Login';
+import './App.css';
+import Product from "./Product";
+import User from "./User";
+import Header from "./Header";
+import Post from "./Post";
+import Main1 from "./Main1";
+import Footer from "./Footer";
+import {nanoid} from "nanoid";
+import { useCallback, useRef, useState } from "react";
+import { useEffect } from "react";
+import Category from "./Category";
+import Card from "./Card";
+import AllCards from "./AllCards";
+import Calculator from "./Calculator";
+import Register from "./Register";
+import Login from "./Login";
 import Zadacha1 from "./Zadacha1";
-import Zadacha2 from "./Zadacha2"
+import Zadacha2 from "./Zadacha2";
+import Items from "./Items";
+import Products from "./Products";
 
 function App() {
+  const [text, setText] = useState("text");
+  const [producti, setProducti] = useState(["Молоко", "Кефир", "Хлеб"]);
+
+  const addNewProduct = useCallback(() => {
+    setProducti([...producti, "Ватрушка"]);
+  }, [producti]);
+
+  function AddZnak() {
+    setText(text + "!")
+  }
+
   return (
     <div>
-    <Zadacha1/>
-    <Zadacha2/>
+      <p onClick={AddZnak}>{text}</p>
+      <Products products={producti} addNewProduct={addNewProduct}/>
     </div>
   )
 }
+
+// function App() {
+//   const [count, setCount] = useState(0);
+//   const [items, setItems] = useState([]);
+//   const addItem=useCallback(()=>{
+//     setItems((prevItems)=>[...prevItems,"new items"]);
+//   },[])
+
+  // function addItem() {
+  //   setItems([...items, "new item"]);
+  // }
+//   console.log("App render");
+
+//   return (
+//     <div>
+//       <h2>Count: {count}</h2>
+//       <button onClick={()=>setCount(count+1)}>
+//         изменить count
+//       </button>
+//       <Items items={items} addItem={addItem}/>
+//     </div>
+//   );
+// }
+
+// function App() {
+
+//   const textRef = useRef("");
+
+//   const handleClick=() => {
+//     textRef.current.focus();
+//     textRef.current.value="";
+//   };
+
+//   return (
+//     <div>
+//       <input ref={textRef}/>
+//       <button onClick={handleClick}>Очистить</button>
+//     </div>
+//   );
+// }
+
+
+// function App() {
+
+//   const textRef=useRef("");
+
+//   const znak=() => {
+//     textRef.current=textRef.current + "!";
+//   };
+
+//   return (
+//     <div>
+//       <p>{textRef.current}</p>
+//       <button onClick={znak}>Добавить !</button>
+//     </div>
+//   );
+// }
+
+// function App() {
+//   const [state, setState] = useState(0);
+//   const countRef=useRef(0);
+//   function stateClick(){
+//     setState(count+1);
+//   }
+//   function refClick(){
+//     countRef.current++;
+//     console.log(countRef.current);
+//   }
+//   return (
+//     <div>
+//       <h2>state count {count}</h2>
+//       <button onClick={stateClick}>
+//         state click
+//       </button>
+//       <h2>Ref: {countRef.current}</h2>
+//       <button onClick={refClick}>
+//         ref click
+//       </button>
+//     </div>
+//   )
+// }
 
 // function App() {
 
