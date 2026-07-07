@@ -6,7 +6,7 @@ import Post from "./Post";
 import Main1 from "./Main1";
 import Footer from "./Footer";
 import {nanoid} from "nanoid";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, useTransition } from "react";
 import { useEffect } from "react";
 import Category from "./Category";
 import Card from "./Card";
@@ -18,26 +18,112 @@ import Zadacha1 from "./Zadacha1";
 import Zadacha2 from "./Zadacha2";
 import Items from "./Items";
 import Products from "./Products";
+import ProductList from './ProductList';
+import Profile from './Profile';
+import { MyContext } from './MyContext';
+import Parent from './Parent';
 
-function App() {
-  const [text, setText] = useState("text");
-  const [producti, setProducti] = useState(["Молоко", "Кефир", "Хлеб"]);
+function App () {
 
-  const addNewProduct = useCallback(() => {
-    setProducti([...producti, "Ватрушка"]);
-  }, [producti]);
-
-  function AddZnak() {
-    setText(text + "!")
+  const user={
+    age: 42
   }
 
   return (
-    <div>
-      <p onClick={AddZnak}>{text}</p>
-      <Products products={producti} addNewProduct={addNewProduct}/>
-    </div>
+    <MyContext.Provider value={user}>
+      <div>
+        <Parent/>
+      </div>
+    </MyContext.Provider>
   )
 }
+
+
+
+
+// function App() {
+//   const user={
+//     name: "Arara",
+//     age: 20,
+//     email: "arara@gmail.com"
+//   }
+//   return (
+//     <MyContext.Provider value={user}>
+//       <div>
+//         <h1>App</h1>
+//         <Profile/>
+//         <Footer/>
+//       </div>
+//   </MyContext.Provider>
+//   );
+// }
+
+// const products=[
+//   "Хлеб",
+//   "Молоко",
+//   "Сыр",
+//   "Кефир",
+//   "Колбаса",
+//   "Рис",
+//   "Гречка",
+//   "Бензин"
+// ]
+
+// const products=[];
+// for(let i=1; i<=20000; i++) {
+//   products.push("Product "+i)
+// }
+
+// function App() {
+//   const [inputValue, setinputValue] = useState("");
+//   const [filterItem, setfilterItem] = useState("");
+//   const [isPending, startTransition] = useTransition();
+//   const filterProducts=products.filter((product)=>
+//   product.toLowerCase().includes(filterItem.toLowerCase()))
+
+//   function updateFilterHandler(event) {
+//     const value=event.target.value;
+//     setinputValue(value);
+//     startTransition(()=> {
+//       setfilterItem(value);
+//     });
+//   }
+
+//   return (
+//     <div>
+//       <h1>Поиск товара</h1>
+//         <input type="text"
+//         value={inputValue}
+//         onChange={updateFilterHandler}
+//         placeholder="Введите товар"/>
+//         {isPending && <p>Список обновляется...</p>}
+//         <ProductList product={filterProducts}/>
+//     </div>
+//   );
+// }
+
+
+
+
+// function App() {
+//   const [text, setText] = useState("text");
+//   const [producti, setProducti] = useState(["Молоко", "Кефир", "Хлеб"]);
+
+//   const addNewProduct = useCallback(() => {
+//     setProducti([...producti, "Ватрушка"]);
+//   }, [producti]);
+
+//   function AddZnak() {
+//     setText(text + "!")
+//   }
+
+//   return (
+//     <div>
+//       <p onClick={AddZnak}>{text}</p>
+//       <Products products={producti} addNewProduct={addNewProduct}/>
+//     </div>
+//   )
+// }
 
 // function App() {
 //   const [count, setCount] = useState(0);
